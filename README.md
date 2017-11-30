@@ -1,7 +1,8 @@
-##########TO INSTALL##########
+# LEARNING SYSTEM
+## INSTALLATION
 Prerequisites:
 1. Need node.js installed - https://nodejs.org/en/
-2. yarn installed (npm install -g yarn)
+2. Need yarn installed (npm install -g yarn)
 
 To Run:
 1. cd to project directory (./learning_system)
@@ -12,7 +13,14 @@ To Run:
 1. yarn add semantic-ui-react
 2. yarn add semantic-ui-css
 3. yarn start
-##########INSTRUCTIONS GIVEN##########
+## ASSUMPTIONS
+1. Input courses file must be in following delimited space format as given in instructions. Only the "NAME" field is allowed to have spaces. (header is for show only, remove the header line in the file being uploaded).
+
+ID NAME LENGTH SUBJECT
+12345 Discrete Math 3 Math
+88333 Java 3 CS
+
+## INSTRUCTIONS GIVEN
 Take Home Project
 
 Create a program that models a learning system.

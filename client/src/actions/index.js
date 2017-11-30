@@ -52,6 +52,14 @@ export function updateCourse(c) {
   };
 }
 
+export function removeCourse(id) {
+  return function (dispatch) {
+    fetch("/courses/" + id, {
+      method: "DELETE"
+    }).then(() => dispatch(loadCourses()));
+  };
+}
+
 export function setSearchText(txt){
   return {
     type:"SET_SEARCH_TEXT",

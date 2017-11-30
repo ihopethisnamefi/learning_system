@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import Courses from "../components/Courses";
 import {
-  saveFavs
+  saveFavs,
+  removeCourse
 } from "../actions";
 
 
@@ -16,7 +17,10 @@ function mapDispatchToProps(dispatch) {
   return {
       saveFavs: function (fav) {
           dispatch(saveFavs(fav));
-    }
+    },
+    removeCourse: function (id) {
+      dispatch(removeCourse(id));
+  }
   }
 }
 

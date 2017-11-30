@@ -35,7 +35,7 @@ function create(req, res) {
         var nextRest = rest.substring(0, rest.lastIndexOf(" ") - 2);
         var splitId = nextRest.substr(0, nextRest.indexOf(" "));
         var splitName = nextRest.substr(nextRest.indexOf(" ") + 1);
-        console.log(splitName);
+        //console.log(splitName);
         var Obj = {
             _id: Number(splitId),
             name: splitName,
