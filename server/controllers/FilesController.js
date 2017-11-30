@@ -26,12 +26,21 @@ function create(req, res) {
         var Objarray = [];
         var array = fs.readFileSync('./server/courses.txt').toString().split("\n");
         for(var i in array) {
+        
+        //Begin split logic, since name is allowed to have spaces and files are space delimited. 
         var splitString = array[i].split(" ");
+        var splitSubject = array[i].substring(array[i].lastIndexOf(" ") + 1);
+        var rest = array[i].substring(0, array[i].lastIndexOf(" ") + 1);
+        var splitLength = rest.substring(rest.lastIndexOf(" ") - 1, rest.length);
+        var nextRest = rest.substring(0, rest.lastIndexOf(" ") - 2);
+        var splitId = nextRest.substr(0, nextRest.indexOf(" "));
+        var splitName = nextRest.substr(nextRest.indexOf(" ") + 1);
+        console.log(splitName);
         var Obj = {
-            _id: Number(splitString[0]),
-            name: splitString[1],
-            length: Number(splitString[2]),
-            subject: splitString[3]
+            _id: Number(splitId),
+            name: splitName,
+            length: Number(splitLength),
+            subject: splitSubject
         }
         var jsonString = JSON.stringify(Obj);
         //console.log("TEST" + Obj._id);
