@@ -20,6 +20,11 @@ ID NAME LENGTH SUBJECT
 12345 Discrete Math 3 Math
 88333 Java 3 CS
 ```
+## ISSUES/BUGS TO FIX
+1. Able to add duplicates from courses list to favorites list. There are a few ways to fix.
+-Can delete object from courses list once user clicks add to favorites, and then when user clicks remove from favorites can add object back to courses list.
+-Or can also deactivate the Add button once user clicks it, and then reactivate once user deletes that object from favorites list. 
+2. Need some sort of field validation for user input file, and error handle if user uploads incorrect format/file.  
 ## INSTRUCTIONS GIVEN
 Take Home Project
 
