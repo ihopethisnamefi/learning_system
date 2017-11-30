@@ -2,5 +2,6 @@ export default {
   courses: [],
   course: {},
   favs: [],
-  fav: {}
+  uploadSuccess: [],
+  uploadFail: [],
 };

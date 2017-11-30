@@ -10,6 +10,10 @@ class EditCourse extends React.Component {
         nameVisible: false,
         subjectVisible: false,
         lengthVisible: false,
+        nameEditFlagVisible: false,
+        subjectEditFlagVisible: false,
+        lengthEditFlagVisible: false,
+        errorEditFlagVisible: false,
       course: {
         _id: "",
         name: "",
@@ -61,6 +65,34 @@ class EditCourse extends React.Component {
             value: c._id
         }
     });
+    let nameEditFlag = "";
+    if (this.state.nameEditFlagVisible === true ){
+      nameEditFlag= "Please enter a valid name (letters and spaces only)";
+    }
+    else{
+      nameEditFlag = "";
+    }
+    let subjectEditFlag = "";
+    if (this.state.subjectEditFlagVisible === true ){
+      subjectEditFlag= "Please enter a valid subject (letters only)";
+    }
+    else{
+      subjectEditFlag= "";
+    }
+    let lengthEditFlag = "";
+    if (this.state.lengthEditFlagVisible === true ){
+      lengthEditFlag= "Please enter a valid length (numbers) only)";
+    }
+    else{
+      lengthEditFlag= "";
+    }
+    let errorEditFlag = "";
+    if (this.state.errorEditFlagVisible === true ){
+      errorEditFlag= "Cannot edit field. Please fix error first and make sure field is populated.";
+    }
+    else{
+      errorEditFlag= "";
+    }
     let fields = [
         {
             text: "name",
@@ -85,36 +117,51 @@ class EditCourse extends React.Component {
     let changeName = "";
     if (this.state.nameVisible){
         changeName = <div>
-                            Name: <Input placeholder="Text" onChange={(e) => {
-                                
-                            let tempCourse = this.props.courses.filter((c) => { 
-                                return c._id === this.state.course._id; 
-                            });
-                            //console.log(tempCourse);
-                            const course = {name: e.target.value,
-                                            length: tempCourse[0].length,
-                                            subject: tempCourse[0].subject};
-                            this.setState({
-                                course: Object.assign(this.state.course,course)
-                            });
+                            Name: <Input placeholder="Letters and Spaces" onChange={(e) => {
+                            if (/^[a-zA-Z\s]+$/.test(e.target.value) || e.target.value === ""){    
+                              let tempCourse = this.props.courses.filter((c) => { 
+                                  return c._id === this.state.course._id; 
+                              });
+                              //console.log(tempCourse);
+                              const course = {name: e.target.value,
+                                              length: tempCourse[0].length,
+                                              subject: tempCourse[0].subject};
+                              this.setState({
+                                  nameEditFlagVisible: false,
+                                  course: Object.assign(this.state.course,course)
+                              });
+                            }
+                            else{
+                              this.setState({
+                                  nameEditFlagVisible: true
+                                });
+
+                            }
                             }} />
                     </div>
     }
     let changeSubject = "";
     if (this.state.subjectVisible){
         changeSubject = <div>
-              Subject: <Input placeholder="Text" onChange={(e) => {
-                    
-                let tempCourse = this.props.courses.filter((c) => { 
-                    return c._id === this.state.course._id; 
-                });
-                //console.log(tempCourse);
-                const course = {subject: e.target.value,
-                                length: tempCourse[0].length,
-                                name: tempCourse[0].name};
-                this.setState({
-                  course: Object.assign(this.state.course,course)
-                });
+              Subject: <Input placeholder="Letters Only" onChange={(e) => {
+                if (/^[a-zA-Z]+$/.test(e.target.value) || e.target.value === ""){   
+                  let tempCourse = this.props.courses.filter((c) => { 
+                      return c._id === this.state.course._id; 
+                  });
+                  //console.log(tempCourse);
+                  const course = {subject: e.target.value,
+                                  length: tempCourse[0].length,
+                                  name: tempCourse[0].name};
+                  this.setState({
+                    subjectEditFlagVisible: false,
+                    course: Object.assign(this.state.course,course)
+                  });
+                }
+                else{
+                  this.setState({
+                    subjectEditFlagVisible: true
+                  });
+                }
               }} />
             </div>
     }
@@ -122,17 +169,24 @@ class EditCourse extends React.Component {
     if (this.state.lengthVisible){
         changeLength = <div>
               Length: <Input placeholder="Number" onChange={(e) => {
-                    
-                let tempCourse = this.props.courses.filter((c) => { 
-                    return c._id === this.state.course._id; 
-                });
-                //console.log(tempCourse);
-                const course = {length: e.target.value,
-                                subject: tempCourse[0].subject,
-                                name: tempCourse[0].name};
-                this.setState({
-                  course: Object.assign(this.state.course,course)
-                });
+                if (/^[0-9]+$/.test(e.target.value) || e.target.value === ""){    
+                  let tempCourse = this.props.courses.filter((c) => { 
+                      return c._id === this.state.course._id; 
+                  });
+                  //console.log(tempCourse);
+                  const course = {length: e.target.value,
+                                  subject: tempCourse[0].subject,
+                                  name: tempCourse[0].name};
+                  this.setState({
+                    lengthEditFlagVisible: false,
+                    course: Object.assign(this.state.course,course)
+                  });
+                }
+                else{
+                  this.setState({
+                    lengthEditFlagVisible: true
+                  });
+                }
               }} />
             </div>
     }
@@ -145,19 +199,35 @@ class EditCourse extends React.Component {
           <h1>Edit Course</h1>
           <form onSubmit={(e) => {
             e.preventDefault();
-            if (this.props.updateCourse) {
-              this.props.updateCourse(this.state.course);
+            if (this.props.updateCourse && this.state.nameEditFlagVisible === false &&
+              this.state.lengthEditFlagVisible === false && this.state.subjectEditFlagVisible === false  &&
+              this.state.course.name !== "" && this.state.course.length !== "" && this.state.course.subject !== "") {
+              
+                this.props.updateCourse(this.state.course);
+                this.setState({
+                      errorEditFlagVisible: false
+                });
+              }
+              else{
+                this.setState({
+                      errorEditFlagVisible: true
+                    });
+              }
             }
-          }}>
+          }>
             <div className="dropdown">
               Select Course ID to Edit: 
               <Dropdown placeholder="Courses" fluid selection onChange={this.selectID} options={courseIDs} />
             </div>
             {fieldsDropdown}
             {changeName}
+            {nameEditFlag}
             {changeSubject}
+            {subjectEditFlag}
             {changeLength}
-            <Button>Edit</Button>
+            {lengthEditFlag}
+            <div><Button>Edit</Button></div>
+            {errorEditFlag}
           </form>     
       </div>
       </center>

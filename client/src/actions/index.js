@@ -98,3 +98,36 @@ export function removeFav(id) {
     }).then(() => dispatch(loadFavs()));
   };
 }
+
+export function uploadSuccess(data) {
+  return {
+    type: 'UPLOAD_DOCUMENT_SUCCESS',
+    value: data,
+  };
+}
+
+export function uploadFail(error) {
+  return {
+    type: 'UPLOAD_DOCUMENT_FAIL',
+    value: error,
+  };
+}
+
+export function uploadDocumentRequest(file ) {  
+  //console.log(file);
+  //let data = new FormData();
+  //data.append("file", file);
+
+  var form = new FormData();
+  form.append("file", file.files[0]);
+  
+
+  return function (dispatch) {
+    fetch("/files", {
+      method: "POST",
+      body: form
+    })
+    .then(response => dispatch(uploadSuccess(response)))
+  };
+}
+

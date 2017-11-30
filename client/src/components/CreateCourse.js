@@ -21,35 +21,35 @@ class CreateCourse extends React.Component {
   render() {
     let idFlag = "";
     if (this.state.idFlagVisible === true ){
-      idFlag = "Please Enter A Valid ID (5 digit number)";
+      idFlag = "Please enter a valid ID (5 digit number)";
     }
     else{
       idFlag = "";
     }
     let nameFlag = "";
     if (this.state.nameFlagVisible === true ){
-      nameFlag= "Please Enter A Valid Name (Letters Only)";
+      nameFlag= "Please enter a valid name (letters only)";
     }
     else{
       nameFlag = "";
     }
     let lengthFlag = "";
     if (this.state.lengthFlagVisible === true ){
-      lengthFlag= "Please Enter A Valid Length (Numbers Only)";
+      lengthFlag= "Please enter a valid length (numbers only)";
     }
     else{
       lengthFlag = "";
     }
     let subjectFlag = "";
     if (this.state.subjectFlagVisible === true ){
-      subjectFlag= "Please Enter A Valid Subject (Letters Only)";
+      subjectFlag= "Please enter a valid subject (letters only)";
     }
     else{
       subjectFlag = "";
     }
     let errorFlag = "";
     if (this.state.errorFlagVisible === true ){
-      errorFlag= "Cannot Create. Please Fix Errors First";
+      errorFlag= "Cannot create. Please fix errors first and make sure all fields are populated.";
     }
     else{
       errorFlag = "";
@@ -62,7 +62,8 @@ class CreateCourse extends React.Component {
           <form onSubmit={(e) => {
             e.preventDefault();
             if (this.props.createCourse && this.state.idFlagVisible === false && this.state.nameFlagVisible === false &&
-              this.state.lengthFlagVisible === false && this.state.subjectFlagVisible === false) {
+              this.state.lengthFlagVisible === false && this.state.subjectFlagVisible === false && this.state.course._id !== "" &&
+              this.state.course.name !== "" && this.state.course.length !== "" && this.state.course.subject !== "") {
               this.props.createCourse(this.state.course);
               this.setState({
                       errorFlagVisible: false

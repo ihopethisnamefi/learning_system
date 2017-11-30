@@ -29,10 +29,22 @@ function favs(state = [], action) {
   return state;
 }
 
+function uploadSuccess(state = [], action) {
+  if (action.type === "UPLOAD_DOCUMENT_SUCCESS") {
+    return action.value;
+  }
+  return state;
+}
 
+function uploadFail(state = [], action) {
+  if (action.type === "UPLOAD_DOCUMENT_FAIL") {
+    return action.value;
+  }
+  return state;
+}
 
 
 const rootReducer = combineReducers({
-  courses,course,searchText,favs
+  courses,course,searchText,favs,uploadSuccess,uploadFail
 });
 export default rootReducer;

@@ -8,6 +8,7 @@ class Course extends Component {
   }
 
   render() {
+    //console.log(this.props);
     return (
       <div>
         <div><b>ID:</b> {this.props.course._id}</div>
