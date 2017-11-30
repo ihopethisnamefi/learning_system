@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {loadCourses} from "../actions";
 
 
+
 function mapDispatchToProps(dispatch) {
   return {
     loadCourses: function () {

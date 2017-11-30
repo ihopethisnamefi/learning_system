@@ -121,7 +121,24 @@ export function uploadDocumentRequest(file ) {
   var form = new FormData();
   form.append("file", file.files[0]);
   
+  /*const request = fetch("/files", {
+    method: "POST",
+    body: form
+  })
 
+  return (dispatch) => {
+    function onSuccess(success){
+      dispatch({ type:'UPLOAD_DOCUMENT_SUCCESS',payload:success});
+      return success;
+    }
+
+    function onError(error){
+      dispatch({type:'UPLOAD_DOCUMENT_FAIL',error });
+      return error;
+    }
+
+    request.then(success => onSuccess, error => onError);
+  }*/
   return function (dispatch) {
     fetch("/files", {
       method: "POST",
