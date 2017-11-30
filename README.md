@@ -15,11 +15,11 @@ To Run:
 3. yarn start
 ## ASSUMPTIONS
 1. Input courses file must be in following delimited space format as given in instructions. Only the "NAME" field is allowed to have spaces. (header is for show only, remove the header line in the file being uploaded).
-
-    ID NAME LENGTH SUBJECT
-    12345 Discrete Math 3 Math
-    88333 Java 3 CS
-
+```
+ID NAME LENGTH SUBJECT
+12345 Discrete Math 3 Math
+88333 Java 3 CS
+```
 ## INSTRUCTIONS GIVEN
 Take Home Project
 
