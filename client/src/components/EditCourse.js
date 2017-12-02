@@ -174,7 +174,7 @@ class EditCourse extends React.Component {
                       return c._id === this.state.course._id; 
                   });
                   //console.log(tempCourse);
-                  const course = {length: e.target.value,
+                  const course = {length: Number(e.target.value),
                                   subject: tempCourse[0].subject,
                                   name: tempCourse[0].name};
                   this.setState({

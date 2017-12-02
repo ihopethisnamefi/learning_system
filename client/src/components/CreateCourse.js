@@ -112,7 +112,7 @@ class CreateCourse extends React.Component {
             <div>
               Length: <Input placeholder="Number" onChange={(e) => {
                 if (/^[0-9]+$/.test(e.target.value) || e.target.value === ""){
-                  const course = {length: e.target.value};
+                  const course = {length: Number(e.target.value)};
                   this.setState({
                     lengthFlagVisible: false,
                     course: Object.assign(this.state.course,course)
